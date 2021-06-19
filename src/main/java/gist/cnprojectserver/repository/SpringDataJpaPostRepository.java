@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface SpringDataJpaPostRepository extends JpaRepository<Post, Long>, PostRepository {
-    @Override
+public interface SpringDataJpaPostRepository extends JpaRepository<Post, Long>{
+    Optional<Post> findById(String title);
     Optional<Post> findByTitle(String title);
 }

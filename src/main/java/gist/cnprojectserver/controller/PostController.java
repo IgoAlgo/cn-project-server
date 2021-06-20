@@ -41,7 +41,7 @@ public class PostController {
         return postService.findPostById(id)
                 .map(post -> {
                     post.setTitle(postDto.getTitle());
-                    post.setTitle(postDto.getContent());
+                    post.setContent(postDto.getContent());
                     postService.updatePost(post);
                     return ResponseEntity.ok().build();
                 })

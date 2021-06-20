@@ -1,12 +1,11 @@
 package gist.cnprojectserver.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@CrossOrigin("*")
 public class ElbController {
 
     @Value("${ami-id:N/A}")
@@ -21,9 +20,8 @@ public class ElbController {
     @Value("${services/domain:N/A}")
     private String serviceDomain;
 
-    @GetMapping("/hello")
-    public String getPrivateIP() {
-//        return "123";
-        return amiId + "\n\r\n\r" + hostname + "\n\r\n\r" + instanceType + "\n\r" + serviceDomain;
+    @GetMapping("/index")
+    public ResponseEntity<String> getInstanceInfo() {
+        return ResponseEntity.ok().body(amiId + "\n\r\n\r" + hostname + "\n\r\n\r" + instanceType + "\n\r" + serviceDomain);
     }
 }

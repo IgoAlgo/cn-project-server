@@ -4,11 +4,7 @@ import gist.cnprojectserver.domain.Post;
 import gist.cnprojectserver.domain.PostDto;
 import gist.cnprojectserver.repository.SpringDataJpaPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -19,7 +15,6 @@ public class PostService {
 
     @Autowired
     private final SpringDataJpaPostRepository postRepository;
-
 
     public PostService(SpringDataJpaPostRepository postRepository) {
         this.postRepository = postRepository;
@@ -36,8 +31,7 @@ public class PostService {
         return String.valueOf(post.getId());
     }
 
-    public
-/*
+    /*
     public ResponseEntity<Object> updateTemplate(@RequestBody TemplateRequestDto templateRequestDto, @PathVariable Long id) {
         return templateService.getTemplateById(id)
                 .map(template -> {

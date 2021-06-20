@@ -31,6 +31,17 @@ public class PostService {
         return String.valueOf(post.getId());
     }
 
+    @Transactional
+    public String updatePost(Post post) {
+        postRepository.save(post);
+        return String.valueOf(post.getId());
+    }
+
+    @Transactional
+    public void deletePost(Long id) {
+        postRepository.deleteById(id);
+    }
+
     /*
     public ResponseEntity<Object> updateTemplate(@RequestBody TemplateRequestDto templateRequestDto, @PathVariable Long id) {
         return templateService.getTemplateById(id)

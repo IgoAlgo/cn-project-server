@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface SpringDataJpaPostRepository extends JpaRepository<Post, Long>{
     Optional<Post> findById(String title);
-    Optional<Post> findByTitle(String title);
 }

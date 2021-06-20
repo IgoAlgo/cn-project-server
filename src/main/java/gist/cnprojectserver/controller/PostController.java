@@ -1,9 +1,11 @@
 package gist.cnprojectserver.controller;
 
+import gist.cnprojectserver.domain.ErrorMessage;
 import gist.cnprojectserver.domain.Post;
 import gist.cnprojectserver.domain.PostDto;
 import gist.cnprojectserver.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,23 @@ public class PostController {
 
     @PutMapping("/posts/{id}")
     public ResponseEntity<Object> updatePost(@RequestBody PostDto postDto, @PathVariable Long id) {
+        return postService.findPostById(id)
+                .map(post -> {
+                    post.setTitle(postDto.getTitle());
+                    post.setTitle(postDto.getContent());
+                    postService.updatePost(post);
+                    return ResponseEntity.ok().build();
+                })
+                .orElseGet(() ->
+                        ResponseEntity.badRequest().body(
+                                new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "해당 ID의 게시글을 찾을 수 없습니다.")
+                        )
+                );
+    }
 
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<Object> deletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.ok().build();
     }
 }
